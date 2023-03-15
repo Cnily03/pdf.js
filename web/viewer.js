@@ -3402,7 +3402,7 @@ const PDFViewerApplication = {
 exports.PDFViewerApplication = PDFViewerApplication;
 let validateFileURL;
 {
-  const HOSTED_VIEWER_ORIGINS = ["null", "http://alist-org.github.io", "https://alist-org.github.io", "https://alist.nn.ci"];
+  const HOSTED_VIEWER_ORIGINS = ["null", "http://jevon.wang", "https://jevon.wang", "http://*.jevon.wang", "https://*.jevon.wang", "http://cnily.top", "https://cnily.top", "http://*.cnily.top", "https://*.cnily.top"];
 
   validateFileURL = function (file) {
     if (!file) {
@@ -3412,7 +3412,7 @@ let validateFileURL;
     try {
       const viewerOrigin = new URL(window.location.href).origin || "null";
 
-      if (HOSTED_VIEWER_ORIGINS.includes(viewerOrigin)) {
+      if (HOSTED_VIEWER_ORIGINS.map(t => RegExp(t.replace(/\*/, ".*?")).test(viewerOrigin)).includes(true)) {
         return;
       }
 
